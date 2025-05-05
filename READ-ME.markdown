@@ -2,6 +2,12 @@
 
 This repository implements an AI system for detecting and recognizing Arabic text in natural scene images using a modified EAST detector with attention and a transformer-based recognizer. The project involved developing a computer vision system for Arabic scene text detection and recognition, addressing a UAE problem (COE-49413, AUS). It uses a modified EAST detector with attention and a transformer-based recognizer on the EvArEST dataset, trained on GPU. See the report's Training Analysis section for loss curve and epoch-loss details.
 
+## Dataset
+We used the EvArEST dataset, which includes training and testing splits for Arabic and English scene text. Download from [https://github.com/HGamal11/EvArEST-dataset-for-Arabic-scene-text](https://github.com/HGamal11/EvArEST-dataset-for-Arabic-scene-text).
+- **Training**: Used for model training (`EvArEST/train/`).
+- **Testing**: Used for evaluation (`EvArEST/test/`).
+- **Note**: The code processes only Arabic text annotations, filtering out English text to focus on Arabic script challenges.
+
 ## Setup
 1. **Install dependencies**:
    ```bash
@@ -115,6 +121,18 @@ Test F1-Score: 0.89, CER: 4.8, WER: 8.5
 - **Dataset**: EvArEST, 128x128 input, 128x128 ROIs, Arabic-only.
 - **Models**: `EASTWithAttention` (MobileNetV2), `TransformerRecognizer` (`d_model=128`, `num_layers=2`).
 - **Optimizations**: Batch size 8, `accum_steps=1`, AMP, `gc.collect()`.
+
+## Notes
+- Annotations are in the format: `x1,y1,x2,y2,x3,y3,x4,y4,language,text`. The code filters for `language=Arabic` and uses the 10th field as text.
+- Adjust `vocab_size` based on the Arabic character set used.
+- The attention mechanism in EAST enhances detection of complex Arabic calligraphy.
+- The single-image test validates dataset loading, and saved images (e.g., `output.jpg`) can be used for the demo.
+- If python-Levenshtein is unavailable, a fallback Levenshtein function is used (slower, less optimized).
+- A custom collate function handles variable-length annotations in the DataLoader.
+- TransformerRecognizer uses d_model=128 and nhead=4 to match encoder output (128 channels).
+- Input resolution is set to 256x256 and batch_size=4 to prevent CUDA out-of-memory errors.
+- Set PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to reduce memory fragmentation.
+"""
 
 ## Limitations
 - Sensitivity to low-resolution images.
