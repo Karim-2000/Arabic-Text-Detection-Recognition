@@ -1,6 +1,6 @@
 # Arabic Text Detection and Recognition
 
-This project develops a computer vision system for Arabic scene text detection and recognition, addressing a UAE problem (COE-49413, AUS). It uses a modified EAST detector with attention and a transformer-based recognizer on the EvArEST dataset, trained on GPU. See the report's Training Analysis section for loss curve and epoch-loss details.
+This repository implements an AI system for detecting and recognizing Arabic text in natural scene images using a modified EAST detector with attention and a transformer-based recognizer. The project involved developing a computer vision system for Arabic scene text detection and recognition, addressing a UAE problem (COE-49413, AUS). It uses a modified EAST detector with attention and a transformer-based recognizer on the EvArEST dataset, trained on GPU. See the report's Training Analysis section for loss curve and epoch-loss details.
 
 ## Setup
 1. **Install dependencies**:
@@ -25,7 +25,7 @@ This project develops a computer vision system for Arabic scene text detection a
 ```bash
 python main.py
 ```
-- Trains for 20 epochs on GPU (~2–6 hours for ~5,000 images, batch size 8).
+- Trains for 20 epochs on GPU (~1–2 hours for ~1,000 images, batch size 8).
 - Saves: `detector.pth`, `recognizer.pth`, `vocab.pkl`, `sample_output.png`.
 
 ## Testing/Evaluation
@@ -107,7 +107,7 @@ Test F1-Score: 0.89, CER: 4.8, WER: 8.5
 ## Requirements
 - Python 3.8+
 - PyTorch 1.9+
-- GPU (e.g., NVIDIA V100)
+- GPU
 - EvArEST dataset
 - python-Levenshtein, matplotlib
 
