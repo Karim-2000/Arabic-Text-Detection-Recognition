@@ -146,7 +146,10 @@ Test F1-Score: 0.89, CER: 4.8, WER: 8.5
 - A custom collate function handles variable-length annotations in the DataLoader.
 - TransformerRecognizer uses d_model=128 and nhead=4 to match encoder output (128 channels).
 - Input resolution is set to 256x256 and batch_size=4 to prevent CUDA out-of-memory errors.
+- Recognition processes cropped regions (ROIs) based on bounding boxes to align predictions with text annotations.
+- Automatic Mixed Precision (AMP) reduces memory usage, with robust gradient validation.
 - Set PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to reduce memory fragmentation.
+- Enhanced memory management (sequential processing, torch.no_grad, runtime restart, torch.cuda.empty_cache, gc.collect) prevents out-of-memory errors.
 """
 
 ## Limitations
