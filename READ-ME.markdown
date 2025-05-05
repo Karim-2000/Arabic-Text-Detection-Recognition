@@ -33,8 +33,23 @@ python main.py
 ```
 - Trains for 20 epochs on GPU (~1–2 hours for ~1,000 images, batch size 8).
 - Saves: `detector.pth`, `recognizer.pth`, `vocab.pkl`, `sample_output.png`.
+The model trains on GPU if available, using the training split (Arabic text only). Adjust `epochs` and `batch_size` as needed. Model weights are saved as `detector.pth` and `recognizer.pth`.
 
 ## Testing/Evaluation
+
+
+To evaluate the model on the testing split:
+1. Train the model or load trained weights:
+   ```python
+   detector.load_state_dict(torch.load("detector.pth"))
+   recognizer.load_state_dict(torch.load("recognizer.pth"))
+   ```
+2. Run evaluation:
+   ```python
+   evaluate_model(detector, recognizer, test_dataloader, device, vocab)
+   ```
+
+
 ```python
 import pickle
 with open("vocab.pkl", "rb") as f:
@@ -114,7 +129,7 @@ Test F1-Score: 0.89, CER: 4.8, WER: 8.5
 - Python 3.8+
 - PyTorch 1.9+
 - GPU
-- EvArEST dataset
+- EvArEST dataset with images and annotations
 - python-Levenshtein, matplotlib
 
 ## Implementation
