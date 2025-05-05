@@ -150,7 +150,7 @@ Test F1-Score: 0.89, CER: 4.8, WER: 8.5
 - Automatic Mixed Precision (AMP) reduces memory usage, with robust gradient validation.
 - Set PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to reduce memory fragmentation.
 - Enhanced memory management (sequential processing, torch.no_grad, runtime restart, torch.cuda.empty_cache, gc.collect) prevents out-of-memory errors.
-"""
+
 
 ## Limitations
 - Sensitivity to low-resolution images.
